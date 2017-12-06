@@ -1,3 +1,5 @@
+package p1
+
 val inputs = listOf(
     "1122",
     "1111",
