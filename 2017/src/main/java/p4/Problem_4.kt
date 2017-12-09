@@ -16,6 +16,7 @@ fun main(args: Array<String>)
           .map {
             it
                 .split(" ")
+                .map { it.map { it }.sorted().joinToString(separator = "") }
                 .groupBy { it }
                 .map { it.value.size }
                 .max()!! < 2
