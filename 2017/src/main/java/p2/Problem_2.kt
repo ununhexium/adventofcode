@@ -1,9 +1,5 @@
 package p2
 
-import javax.management.RuntimeErrorException
-import kotlin.math.max
-import kotlin.math.min
-
 val input0 = """5 9 2 8
 9 4 7 3
 3 8 6 5"""
@@ -51,7 +47,7 @@ private fun findIntDiv(line: List<Int>): Int
       if (a!=b && a % b == 0)
       {
         println("$a and $b")
-        return max(a, b) / min(a, b)
+        return Math.max(a, b) / Math.min(a, b)
       }
     }
   }
@@ -64,8 +60,5 @@ private fun checksum(input: String): Int
   return grid.map { it.max()!! - it.min()!! }.sum()
 }
 
-private fun inputToGrid(input: String): List<List<Int>>
-{
-  val grid = input.split("\n").map { it.split(" ").map { it.toInt() } }
-  return grid
-}
+private fun inputToGrid(input: String): List<List<Int>> =
+    input.split("\n").map { it.split(" ").map { it.toInt() } }

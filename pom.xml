@@ -11,6 +11,7 @@
   <modules>
     <module>2017</module>
     <module>2016</module>
+    <module>tools</module>
   </modules>
 
   <name>Adevnt of code mini challenges</name>

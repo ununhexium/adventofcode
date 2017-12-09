@@ -1,0 +1,148 @@
+Error:Kotlin: [Internal Error] org.jetbrains.kotlin.codegen.CompilationException: Back-end (JVM) Internal error: wrong code generated
+org.jetbrains.kotlin.codegen.CompilationException Back-end (JVM) Internal error: Couldn't transform method node: error ()V:
+   L0
+    LINENUMBER 14 L0
+    GETSTATIC bug/Position.INSTANCE : Lbug/Position;
+    GETSTATIC bug/Position.INSTANCE : Lbug/Position;
+    POP
+    DUP2
+    INVOKEVIRTUAL bug/Position.getWoops ()I
+    ICONST_0
+    IADD
+    INVOKEVIRTUAL bug/Position.setWoops (I)V
+   L1
+    LINENUMBER 15 L1
+    RETURN
+   L2
+    MAXSTACK = 4
+    MAXLOCALS = 0
+Cause: AFTER mandatory stack transformations: incorrect bytecode
+Element is unknownThe root cause was thrown at: MethodVerifier.kt:29
+bytecode:
+   L0
+    LINENUMBER 14 L0
+    GETSTATIC bug/Position.INSTANCE : Lbug/Position;
+    GETSTATIC bug/Position.INSTANCE : Lbug/Position;
+    POP
+    DUP2
+    INVOKEVIRTUAL bug/Position.getWoops ()I
+    ICONST_0
+    IADD
+    INVOKEVIRTUAL bug/Position.setWoops (I)V
+   L1
+    LINENUMBER 15 L1
+    RETURN
+   L2
+    MAXSTACK = 4
+    MAXLOCALS = 0
+Cause: Back-end (JVM) Internal error: Couldn't transform method node: error ()V:
+   L0
+    LINENUMBER 14 L0
+    GETSTATIC bug/Position.INSTANCE : Lbug/Position;
+    GETSTATIC bug/Position.INSTANCE : Lbug/Position;
+    POP
+    DUP2
+    INVOKEVIRTUAL bug/Position.getWoops ()I
+    ICONST_0
+    IADD
+    INVOKEVIRTUAL bug/Position.setWoops (I)V
+   L1
+    LINENUMBER 15 L1
+    RETURN
+   L2
+    MAXSTACK = 4
+    MAXLOCALS = 0
+Cause: AFTER mandatory stack transformations: incorrect bytecode
+Element is unknownThe root cause was thrown at: MethodVerifier.kt:29
+File being compiled and position: (12,1) in /home/ununhexium/dev/kotlin/adventofcode/2017/src/main/java/bug/Sample.kt
+PsiElement: fun error()
+{
+  woops += 0
+}
+The root cause was thrown at: TransformationMethodVisitor.java:88
+	at org.jetbrains.kotlin.codegen.FunctionCodegen.endVisit(FunctionCodegen.java:833)
+	at org.jetbrains.kotlin.codegen.FunctionCodegen.generateMethodBody(FunctionCodegen.java:346)
+	at org.jetbrains.kotlin.codegen.FunctionCodegen.generateMethod(FunctionCodegen.java:299)
+	at org.jetbrains.kotlin.codegen.FunctionCodegen.generateMethod(FunctionCodegen.java:177)
+	at org.jetbrains.kotlin.codegen.FunctionCodegen.gen(FunctionCodegen.java:148)
+	at org.jetbrains.kotlin.codegen.MemberCodegen.genSimpleMember(MemberCodegen.java:210)
+	at org.jetbrains.kotlin.codegen.PackagePartCodegen.generateBody(PackagePartCodegen.java:95)
+	at org.jetbrains.kotlin.codegen.MemberCodegen.generate(MemberCodegen.java:142)
+	at org.jetbrains.kotlin.codegen.PackageCodegenImpl.generateFile(PackageCodegenImpl.java:127)
+	at org.jetbrains.kotlin.codegen.PackageCodegenImpl.generate(PackageCodegenImpl.java:66)
+	at org.jetbrains.kotlin.codegen.KotlinCodegenFacade.generatePackage(KotlinCodegenFacade.java:100)
+	at org.jetbrains.kotlin.codegen.KotlinCodegenFacade.doGenerateFiles(KotlinCodegenFacade.java:78)
+	at org.jetbrains.kotlin.codegen.KotlinCodegenFacade.compileCorrectFiles(KotlinCodegenFacade.java:45)
+	at org.jetbrains.kotlin.cli.jvm.compiler.KotlinToJVMBytecodeCompiler.generate(KotlinToJVMBytecodeCompiler.kt:450)
+	at org.jetbrains.kotlin.cli.jvm.compiler.KotlinToJVMBytecodeCompiler.compileModules(KotlinToJVMBytecodeCompiler.kt:152)
+	at org.jetbrains.kotlin.cli.jvm.K2JVMCompiler.doExecute(K2JVMCompiler.kt:158)
+	at org.jetbrains.kotlin.cli.jvm.K2JVMCompiler.doExecute(K2JVMCompiler.kt:61)
+	at org.jetbrains.kotlin.cli.common.CLICompiler.execImpl(CLICompiler.java:107)
+	at org.jetbrains.kotlin.cli.common.CLICompiler.execImpl(CLICompiler.java:51)
+	at org.jetbrains.kotlin.cli.common.CLITool.exec(CLITool.kt:92)
+	at org.jetbrains.kotlin.daemon.CompileServiceImpl$compile$$inlined$ifAlive$lambda$1.invoke(CompileServiceImpl.kt:380)
+	at org.jetbrains.kotlin.daemon.CompileServiceImpl$compile$$inlined$ifAlive$lambda$1.invoke(CompileServiceImpl.kt:96)
+	at org.jetbrains.kotlin.daemon.CompileServiceImpl$doCompile$$inlined$ifAlive$lambda$2.invoke(CompileServiceImpl.kt:892)
+	at org.jetbrains.kotlin.daemon.CompileServiceImpl$doCompile$$inlined$ifAlive$lambda$2.invoke(CompileServiceImpl.kt:96)
+	at org.jetbrains.kotlin.daemon.common.DummyProfiler.withMeasure(PerfUtils.kt:137)
+	at org.jetbrains.kotlin.daemon.CompileServiceImpl.checkedCompile(CompileServiceImpl.kt:919)
+	at org.jetbrains.kotlin.daemon.CompileServiceImpl.doCompile(CompileServiceImpl.kt:891)
+	at org.jetbrains.kotlin.daemon.CompileServiceImpl.compile(CompileServiceImpl.kt:378)
+	at sun.reflect.GeneratedMethodAccessor79.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:357)
+	at sun.rmi.transport.Transport$1.run(Transport.java:200)
+	at sun.rmi.transport.Transport$1.run(Transport.java:197)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at sun.rmi.transport.Transport.serviceCall(Transport.java:196)
+	at sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:568)
+	at sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:826)
+	at sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:683)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:682)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: org.jetbrains.kotlin.codegen.CompilationException: Back-end (JVM) Internal error: Couldn't transform method node: error ()V:
+   L0
+    LINENUMBER 14 L0
+    GETSTATIC bug/Position.INSTANCE : Lbug/Position;
+    GETSTATIC bug/Position.INSTANCE : Lbug/Position;
+    POP
+    DUP2
+    INVOKEVIRTUAL bug/Position.getWoops ()I
+    ICONST_0
+    IADD
+    INVOKEVIRTUAL bug/Position.setWoops (I)V
+   L1
+    LINENUMBER 15 L1
+    RETURN
+   L2
+    MAXSTACK = 4
+    MAXLOCALS = 0
+Cause: AFTER mandatory stack transformations: incorrect bytecode
+Element is unknownThe root cause was thrown at: MethodVerifier.kt:29
+	at org.jetbrains.kotlin.codegen.TransformationMethodVisitor.visitEnd(TransformationMethodVisitor.java:88)
+	at org.jetbrains.kotlin.codegen.FunctionCodegen.endVisit(FunctionCodegen.java:821)
+	... 43 more
+Caused by: java.lang.AssertionError: AFTER mandatory stack transformations: incorrect bytecode
+	at org.jetbrains.kotlin.codegen.optimization.MethodVerifier.transform(MethodVerifier.kt:29)
+	at org.jetbrains.kotlin.codegen.optimization.transformer.CompositeMethodTransformer.transform(CompositeMethodTransformer.kt:25)
+	at org.jetbrains.kotlin.codegen.optimization.OptimizationMethodVisitor.performTransformations(OptimizationMethodVisitor.kt:44)
+	at org.jetbrains.kotlin.codegen.TransformationMethodVisitor.visitEnd(TransformationMethodVisitor.java:65)
+	... 44 more
+Caused by: java.lang.RuntimeException: org.jetbrains.org.objectweb.asm.tree.analysis.AnalyzerException: Error at instruction 5: Cannot pop operand off an empty stack.
+	at org.jetbrains.kotlin.codegen.optimization.transformer.MethodTransformer.runAnalyzer(MethodTransformer.java:34)
+	at org.jetbrains.kotlin.codegen.optimization.transformer.MethodTransformer.analyze(MethodTransformer.java:44)
+	at org.jetbrains.kotlin.codegen.optimization.MethodVerifier.transform(MethodVerifier.kt:26)
+	... 47 more
+Caused by: org.jetbrains.org.objectweb.asm.tree.analysis.AnalyzerException: Error at instruction 5: Cannot pop operand off an empty stack.
+	at org.jetbrains.org.objectweb.asm.tree.analysis.Analyzer.analyze(Analyzer.java:298)
+	at org.jetbrains.kotlin.codegen.optimization.transformer.MethodTransformer.runAnalyzer(MethodTransformer.java:31)
+	... 49 more
+Caused by: java.lang.IndexOutOfBoundsException: Cannot pop operand off an empty stack.
+	at org.jetbrains.org.objectweb.asm.tree.analysis.Frame.pop(Frame.java:221)
+	at org.jetbrains.org.objectweb.asm.tree.analysis.Frame.execute(Frame.java:377)
+	at org.jetbrains.org.objectweb.asm.tree.analysis.Analyzer.analyze(Analyzer.java:200)
+	... 50 more
