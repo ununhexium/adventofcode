@@ -19,8 +19,9 @@ fun execute(input: MutableList<Int>): Int
   var instructions = 0
   while (index >= 0 && index < input.size)
   {
-    val tmp = index + input[index]
-    input[index]++
+    val current = input[index]
+    val tmp = index + current
+    input[index] = if(current >= 3) current - 1 else current + 1
     index = tmp
     instructions++
   }

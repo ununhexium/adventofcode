@@ -10,9 +10,10 @@ fun main(args: Array<String>)
   println(cycle(ints.toMutableList()))
 }
 
-fun cycle(currentList: MutableList<Int>): Int
+fun cycle(currentList: MutableList<Int>): Pair<Int, Int>
 {
-  val previous = HashSet<List<Int>>()
+  val lookup = HashSet<List<Int>>()
+  val previous = ArrayList<List<Int>>()
   var cycles = 0
 
   while (true)
@@ -22,12 +23,20 @@ fun cycle(currentList: MutableList<Int>): Int
     (1..max.value).forEach { currentList[(max.index + it) % currentList.size]++ }
 
     cycles++
-    if (previous.contains(currentList)) break
+    if (lookup.contains(currentList)) break
 
-    previous.add(currentList.toList())
+    val copy = currentList.toList()
+    lookup.add(copy)
+    previous.add(copy)
   }
 
-  return cycles
+  val index = previous
+      .mapIndexed { index, list -> index to list }
+      .first { it.second == currentList }
+      .first
+
+  val interval = previous.size - index
+  return cycles to interval
 }
 
 
