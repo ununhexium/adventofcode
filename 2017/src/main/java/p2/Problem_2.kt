@@ -1,8 +1,12 @@
 package p2
 
-val input0 = """5 1 9 5
-7 5 3
-2 4 6 8"""
+import javax.management.RuntimeErrorException
+import kotlin.math.max
+import kotlin.math.min
+
+val input0 = """5 9 2 8
+9 4 7 3
+3 8 6 5"""
 
 val input1 = """3458 3471 163 1299 170 4200 2425 167 3636 4001 4162 115 2859 130 4075 4269
 2777 2712 120 2569 2530 3035 1818 32 491 872 113 92 2526 477 138 1360
@@ -30,11 +34,38 @@ fun main(args: Array<String>)
 {
   inputs.forEach {
     println(checksum(it))
+    println(checksum2(it))
   }
+}
+
+fun checksum2(input: String): Int
+{
+  val grid = inputToGrid(input)
+  return grid.map { it -> findIntDiv(it) }.sum()
+}
+
+private fun findIntDiv(line: List<Int>): Int
+{
+  line.map { a ->
+    line.map { b ->
+      if (a!=b && a % b == 0)
+      {
+        println("$a and $b")
+        return max(a, b) / min(a, b)
+      }
+    }
+  }
+  throw RuntimeException("Data is wrong")
 }
 
 private fun checksum(input: String): Int
 {
-  val grid = input.split("\n").map { it.split(" ").map { it.toInt() } }
+  val grid = inputToGrid(input)
   return grid.map { it.max()!! - it.min()!! }.sum()
+}
+
+private fun inputToGrid(input: String): List<List<Int>>
+{
+  val grid = input.split("\n").map { it.split(" ").map { it.toInt() } }
+  return grid
 }
