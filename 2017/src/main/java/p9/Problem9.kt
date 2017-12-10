@@ -1,6 +1,7 @@
 package p9
 
 import com.google.common.io.Resources
+import more.Input
 import more.format
 import p9.State.IGNORE_NEXT_OK
 import p9.State.IGNORE_NEXT_TRASH
@@ -17,10 +18,7 @@ enum class State
 
 fun main(args: Array<String>)
 {
-  val input = Resources.toString(
-      Resources.getResource("p9/input.txt"),
-      Charsets.UTF_8
-  )
+  val input = Input.getFor("p9")
 
   val tests = mapOf(
       "{}" to 1,

@@ -1,14 +1,12 @@
 package p4
 
 import com.google.common.io.Resources
+import more.Input
 
 
 fun main(args: Array<String>)
 {
-  val input = Resources.toString(
-      Resources.getResource("p4/input.txt"),
-      Charsets.UTF_8
-  )
+  val input = Input.getFor("p4")
 
   println(
       input

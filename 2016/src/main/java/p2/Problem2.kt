@@ -1,6 +1,7 @@
 package p2
 
 import com.google.common.io.Resources
+import more.Input
 import p1.Direction
 import p1.Direction.DOWN
 import p1.Direction.LEFT
@@ -55,11 +56,7 @@ data class Position(
 
 fun main(args: Array<String>)
 {
-  val steps = Resources
-      .toString(
-          Resources.getResource("p2/input.txt"),
-          Charsets.UTF_8
-      )
+  val steps = Input.getFor("p2")
       .split("\n")
       .map { it.map { Direction.from(it) } }
 

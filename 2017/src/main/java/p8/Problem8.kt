@@ -1,6 +1,7 @@
 package p8
 
 import com.google.common.io.Resources
+import more.Input
 import javax.management.MXBean
 
 val R1 = "register1"
@@ -43,10 +44,7 @@ fun main(args: Array<String>)
     println("Ok " + it)
   }
 
-  val code = Resources.toString(
-      Resources.getResource("p8/input.txt"),
-      Charsets.UTF_8
-  )
+  val code = Input.getFor("p8")
 
   execute(code)
   println(registers.values.max())

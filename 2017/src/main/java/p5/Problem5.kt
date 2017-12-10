@@ -1,13 +1,11 @@
 package p5
 
 import com.google.common.io.Resources
+import more.Input
 
 fun main(args: Array<String>)
 {
-  val values = Resources.toString(
-      Resources.getResource("p5/input.txt"),
-      Charsets.UTF_8
-  )
+  val values = Input.getFor("p5")
   val input = values.split("\n").map { it.toInt() }
 
   println(execute(input.toMutableList()))

@@ -1,13 +1,11 @@
 package p7
 
 import com.google.common.io.Resources
+import more.Input
 
 fun main(args: Array<String>)
 {
-  val input = Resources.toString(
-      Resources.getResource("p7/input.txt"),
-      Charsets.UTF_8
-  )
+  val input = Input.getFor("p7")
 
   val tree = buildTree(input)
   println("The root is $tree")
