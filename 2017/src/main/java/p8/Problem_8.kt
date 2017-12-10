@@ -9,7 +9,7 @@ val OPCODE = "opcode"
 val V1 = "value1"
 val V2 = "value2"
 val COMP = "comparator"
-val MAX = "SPQR"
+val MAX = "SenatusPopuluQueRomanus"
 
 val registers = HashMap<String, Int>()
 
