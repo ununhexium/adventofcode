@@ -1,3 +1,10 @@
 package more
 
-fun Int.format(digits: Int) = java.lang.String.format("%${digits}d", this)
+import java.lang.String.format
+
+fun Int.format(digits: Int) = format("%${digits}d", this)
+
+fun Int.formattedHexadecimal(
+    digits: Int,
+    padding: Char = '0'
+) = format("%$padding${digits}x", this)
