@@ -1,6 +1,6 @@
 package pack
 
-import com.google.common.collect.Lists
+import com.google.common.collect.Lists.cartesianProduct
 import com.google.common.io.Resources.getResource
 import com.google.common.io.Resources.toString
 import org.funktionale.currying.curried
@@ -30,17 +30,18 @@ fun main(args: Array<String>) {
   // PART2
   val diff = { s: String, t: String ->
     if (s.length != t.length) -1
-    else s.zip(t).count {
+    else (s zip t).count {
       it.first != it.second
     }
   }
 
-  val oneCharDiff = Lists.cartesianProduct(txt, txt).filter {
+  val oneCharDiff = cartesianProduct(txt, txt).filter {
     diff(it[0],it[1]) == 1
   }
 
   val pair = oneCharDiff.first() // assuming there is only 1 instance of such a combination
-  val code = pair[0].zip(pair[1]).joinToString(separator = "") {
+  val glued = pair[0] zip pair[1]
+  val code = glued.joinToString(separator = "") {
     if(it.first == it.second) it.first.toString() else ""
   }
 
