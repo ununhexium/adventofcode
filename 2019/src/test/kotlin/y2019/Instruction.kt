@@ -5,13 +5,13 @@ data class Instruction(
     /**
      * @param 1 Instruction Pointer
      * @param 2 Program
-     *
-     * @return nextPointer
      */
     val execute: (Int, MutableList<Int>) -> Unit
 ) {
   /**
-   * Executes 1 instruction and returns the next instruction pointer value
+   * Executes 1 instruction
+   *
+   * @return the next instruction pointer value
    */
   fun tick(ptr: Int, program: MutableList<Int>): Int {
     execute(ptr, program)

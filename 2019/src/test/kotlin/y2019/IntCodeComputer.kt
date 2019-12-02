@@ -10,12 +10,12 @@ class IntCodeComputer(
   fun compute(): List<Int> {
     var ptr = 0
 
-    val opCodes = instructions
+    val operations = instructions
 
     try {
-      out@ while (true) {
+      while (true) {
         val opCode = program[ptr]
-        val op = opCodes[opCode] ?: error("Unknown operation code $opCode")
+        val op = operations[opCode] ?: error("Unknown operation code $opCode")
         ptr = op.tick(ptr, program)
       }
     } catch (e: HaltException) {
