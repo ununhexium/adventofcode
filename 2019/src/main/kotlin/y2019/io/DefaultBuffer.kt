@@ -1,6 +1,6 @@
 package y2019.io
 
-object DefaultBuffer: InputOutput {
+object DefaultBuffer : InputOutput {
   override val name = "default"
 
   private var value: Int? = null

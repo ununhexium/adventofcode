@@ -29,7 +29,13 @@ object D4B {
         it.toString().zipWithNext().all { it.first <= it.second }
       }.filter {
         // the two adjacent matching digits are not part of a larger group of matching digits
-        it.toString().groupBy { it }.values.groupBy { it.size }[2]?.size ?: 0 >= 1
+        it
+            .toString()
+            .groupBy { it }
+            .values
+            .groupBy { it.size }[2]
+            ?.size
+            ?: 0 >= 1
       }
 
 }

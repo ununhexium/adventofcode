@@ -1,6 +1,6 @@
 package y2019.io
 
-object WriteOnly: Input {
+object WriteOnly : Input {
   override val name = "WriteOnly"
 
   override fun get(index: Int?): Int {

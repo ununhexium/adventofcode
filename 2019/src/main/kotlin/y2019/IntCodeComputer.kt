@@ -7,14 +7,12 @@ import y2019.instruction.Instruction
 import y2019.instruction.JumpIfFalse
 import y2019.instruction.JumpIfTrue
 import y2019.instruction.LessThan
-import y2019.instruction.Poke
 import y2019.instruction.MulInstruction
 import y2019.instruction.Peek
+import y2019.instruction.Poke
 import y2019.io.DefaultBuffer
 import y2019.io.DelegatedInputOutput
 import y2019.io.InputOutput
-import y2019.io.ManualInput
-import y2019.io.PrintingInputOutput
 
 class IntCodeComputer(
     input: List<Int>,

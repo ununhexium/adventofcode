@@ -9,10 +9,10 @@ class Equals(raw: Int) : Instruction(
 
     if (param0.get() == param1.get()) {
       param2.set(1)
-    }else{
+    } else {
       param2.set(0)
     }
 
-    return  nextInstruction(ptr)
+    return nextInstruction(ptr)
   }
 }

@@ -1,7 +1,6 @@
 package y2019.instruction
 
 import y2019.memory.ImmediateMemoryAccessor
-import y2019.memory.MemoryAccessor
 import y2019.memory.Parameter
 import y2019.memory.PositionalMemoryAccessor
 

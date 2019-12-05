@@ -2,7 +2,6 @@ package y2019
 
 import com.google.common.io.Resources
 import java.lang.Long.max
-import java.nio.charset.StandardCharsets
 
 object D1A {
   fun solve(): Long {

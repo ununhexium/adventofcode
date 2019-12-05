@@ -21,8 +21,8 @@ object D2A {
 
   fun solve(input: List<Int>): Int {
     val altered = input.toMutableList()
-    altered[1]=12
-    altered[2]=2
+    altered[1] = 12
+    altered[2] = 2
     val computed = compute(altered)
     return computed[0]
   }

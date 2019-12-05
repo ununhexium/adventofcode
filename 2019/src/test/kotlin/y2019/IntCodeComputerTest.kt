@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import y2019.io.ConsoleOutput
 import y2019.io.DelegatedInputOutput
-import y2019.io.ManualInput
 import y2019.io.PresetManualInput
 
 internal class IntCodeComputerTest {
@@ -306,7 +305,11 @@ internal class IntCodeComputerTest {
             1106, 0, 36, 98, 0, 0, 1002, 21, 125, 20, 4, 20, 1105, 1, 46, 104,
             999, 1105, 1, 46, 1101, 1000, 1, 20, 4, 20, 1105, 1, 46, 98, 99
         ),
-        defaultIO = DelegatedInputOutput("default", PresetManualInput(7), ConsoleOutput)
+        defaultIO = DelegatedInputOutput(
+            "default",
+            PresetManualInput(7),
+            ConsoleOutput
+        )
     ).init()
 
     computer.run()

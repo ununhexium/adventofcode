@@ -48,7 +48,7 @@ internal class D3ATest {
             "R8,U5,L5,D3".parsed(),
             "U7,R6,D4,L4".parsed()
         )
-    ).isEqualTo(15+15)
+    ).isEqualTo(15 + 15)
   }
 
   @Test

@@ -1,9 +1,8 @@
 package y2019.io
 
-import java.io.Console
 import java.util.Scanner
 
-object ManualInput: Input {
+object ManualInput : Input {
   override val name = "ManualInput"
 
   override fun get(index: Int?): Int {
