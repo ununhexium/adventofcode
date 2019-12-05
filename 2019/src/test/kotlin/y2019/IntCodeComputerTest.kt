@@ -46,10 +46,20 @@ internal class IntCodeComputerTest {
   }
 
   @Test
-  fun `D5A`() {
+  fun D5A() {
     val computer = IntCodeComputer(
         Resources.getResource("5.input.txt").readText(),
         initialIo = mapOf("default" to 1)
+    )
+
+    println(computer.run())
+  }
+
+  @Test
+  fun D5B() {
+    val computer = IntCodeComputer(
+        Resources.getResource("5.input.txt").readText(),
+        initialIo = mapOf("default" to 5)
     )
 
     println(computer.run())
