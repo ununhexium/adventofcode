@@ -1,6 +1,6 @@
 package y2019.memory
 
 interface MemoryAccessor {
-  operator fun get(program: List<Int>, address: Int): Int
-  operator fun set(program: MutableList<Int>, address: Int, value: Int)
+  operator fun get(address: Int, program: List<Int>): Int
+  operator fun set(address: Int, program: MutableList<Int>, value: Int)
 }

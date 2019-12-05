@@ -1,19 +1,27 @@
 package y2019
 
 import y2019.instruction.AddInstruction
+import y2019.instruction.Equals
 import y2019.instruction.Halt
-import y2019.instruction.Load
+import y2019.instruction.Instruction
+import y2019.instruction.JumpIfFalse
+import y2019.instruction.JumpIfTrue
+import y2019.instruction.LessThan
+import y2019.instruction.Poke
 import y2019.instruction.MulInstruction
-import y2019.instruction.Store
+import y2019.instruction.Peek
+import y2019.io.DefaultBuffer
+import y2019.io.DelegatedInputOutput
 import y2019.io.InputOutput
+import y2019.io.ManualInput
 import y2019.io.PrintingInputOutput
-import java.util.concurrent.atomic.AtomicReference
 
 class IntCodeComputer(
     input: List<Int>,
     val noun: Int? = null,
     val verb: Int? = null,
-    val initialIo: Map<String, Int>? = null
+    val initialIo: Map<String, Int>? = null,
+    val defaultIO: InputOutput = DefaultBuffer
 ) {
   constructor(
       input: String,
@@ -34,7 +42,7 @@ class IntCodeComputer(
       internalProgram
 
   private val internalIO = listOf(
-      PrintingInputOutput("default")
+      DelegatedInputOutput("default", defaultIO, defaultIO)
   )
       .map { it.name to it }
       .toMap()
@@ -53,8 +61,12 @@ class IntCodeComputer(
     return when (raw % 100) {
       1 -> AddInstruction(raw)
       2 -> MulInstruction(raw)
-      3 -> Store(raw, io())
-      4 -> Load(raw, io())
+      3 -> Peek(raw, io())
+      4 -> Poke(raw, io())
+      5 -> JumpIfTrue(raw)
+      6 -> JumpIfFalse(raw)
+      7 -> LessThan(raw)
+      8 -> Equals(raw)
 
       99 -> Halt()
 
@@ -66,9 +78,9 @@ class IntCodeComputer(
     var ptr = 0
 
     try {
-      out@ while (true) {
+      while (true) {
         val op = getInstruction(internalProgram[ptr])
-        ptr = op.tick(ptr, internalProgram)
+        ptr = op.execute(ptr, internalProgram)
       }
     } catch (e: HaltException) {
       return internalProgram

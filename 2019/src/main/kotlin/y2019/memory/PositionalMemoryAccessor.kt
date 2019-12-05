@@ -1,10 +1,10 @@
 package y2019.memory
 
 object PositionalMemoryAccessor : MemoryAccessor {
-  override fun get(program: List<Int>, address: Int) =
+  override fun get(address: Int, program: List<Int>) =
       program[program[address]]
 
-  override fun set(program: MutableList<Int>, address: Int, value:Int) {
+  override fun set(address: Int, program: MutableList<Int>, value:Int) {
     program[program[address]] = value
   }
 
