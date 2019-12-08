@@ -51,7 +51,7 @@ internal class IntCodeComputerTest {
         initialIo = mapOf("default" to 1)
     )
 
-    println(computer.run())
+    println(computer.run().program[0])
   }
 
   @Test
@@ -61,7 +61,7 @@ internal class IntCodeComputerTest {
         initialIo = mapOf("default" to 5)
     )
 
-    println(computer.run())
+    println(computer.run().program[0])
   }
 
   @Test
@@ -101,55 +101,45 @@ internal class IntCodeComputerTest {
   fun `dont jump if not false`() {
     val computer = IntCodeComputer(
         listOf(106, 1, 0, 104, 116, 99)
-    ).init()
+    )
 
-    computer.run()
-
-    assertThat(computer.io().get()).isEqualTo(116)
+    assertThat(computer.run().io().get()).isEqualTo(116)
   }
 
   @Test
   fun `less than`() {
     val computer = IntCodeComputer(
         listOf(1107, 1, 2, 0, 4, 0, 99)
-    ).init()
+    )
 
-    computer.run()
-
-    assertThat(computer.io().get()).isEqualTo(1)
+    assertThat(computer.run().io().get()).isEqualTo(1)
   }
 
   @Test
   fun `not less than`() {
     val computer = IntCodeComputer(
         listOf(1107, 2, 1, 0, 4, 0, 99)
-    ).init()
+    )
 
-    computer.run()
-
-    assertThat(computer.io().get()).isEqualTo(0)
+    assertThat(computer.run().io().get()).isEqualTo(0)
   }
 
   @Test
   fun `equals`() {
     val computer = IntCodeComputer(
         listOf(1108, 1, 1, 0, 4, 0, 99)
-    ).init()
+    )
 
-    computer.run()
-
-    assertThat(computer.io().get()).isEqualTo(1)
+    assertThat(computer.run().io().get()).isEqualTo(1)
   }
 
   @Test
   fun `not equals`() {
     val computer = IntCodeComputer(
         listOf(1108, 2, 1, 0, 4, 0, 99)
-    ).init()
+    )
 
-    computer.run()
-
-    assertThat(computer.io().get()).isEqualTo(0)
+    assertThat(computer.run().io().get()).isEqualTo(0)
   }
 
   @Test
@@ -157,11 +147,9 @@ internal class IntCodeComputerTest {
     val computer = IntCodeComputer(
         listOf(3, 9, 8, 9, 10, 9, 4, 9, 99, -1, 8),
         initialIo = mapOf("default" to 8)
-    ).init()
+    )
 
-    computer.run()
-
-    assertThat(computer.io().get()).isEqualTo(1)
+    assertThat(computer.run().io().get()).isEqualTo(1)
   }
 
   @Test
@@ -169,11 +157,9 @@ internal class IntCodeComputerTest {
     val computer = IntCodeComputer(
         listOf(3, 9, 8, 9, 10, 9, 4, 9, 99, -1, 8),
         initialIo = mapOf("default" to 116)
-    ).init()
+    )
 
-    computer.run()
-
-    assertThat(computer.io().get()).isEqualTo(0)
+    assertThat(computer.run().io().get()).isEqualTo(0)
   }
 
   @Test
@@ -181,11 +167,9 @@ internal class IntCodeComputerTest {
     val computer = IntCodeComputer(
         listOf(3, 9, 7, 9, 10, 9, 4, 9, 99, -1, 8),
         initialIo = mapOf("default" to -99)
-    ).init()
+    )
 
-    computer.run()
-
-    assertThat(computer.io().get()).isEqualTo(1)
+    assertThat(computer.run().io().get()).isEqualTo(1)
   }
 
   @Test
@@ -193,11 +177,9 @@ internal class IntCodeComputerTest {
     val computer = IntCodeComputer(
         listOf(3, 9, 7, 9, 10, 9, 4, 9, 99, -1, 8),
         initialIo = mapOf("default" to 8)
-    ).init()
+    )
 
-    computer.run()
-
-    assertThat(computer.io().get()).isEqualTo(0)
+    assertThat(computer.run().io().get()).isEqualTo(0)
   }
 
   @Test
@@ -205,11 +187,9 @@ internal class IntCodeComputerTest {
     val computer = IntCodeComputer(
         listOf(3, 3, 1108, -1, 8, 3, 4, 3, 99),
         initialIo = mapOf("default" to 8)
-    ).init()
+    )
 
-    computer.run()
-
-    assertThat(computer.io().get()).isEqualTo(1)
+    assertThat(computer.run().io().get()).isEqualTo(1)
   }
 
   @Test
@@ -217,11 +197,9 @@ internal class IntCodeComputerTest {
     val computer = IntCodeComputer(
         listOf(3, 3, 1108, -1, 8, 3, 4, 3, 99),
         initialIo = mapOf("default" to 116)
-    ).init()
+    )
 
-    computer.run()
-
-    assertThat(computer.io().get()).isEqualTo(0)
+    assertThat(computer.run().io().get()).isEqualTo(0)
   }
 
   @Test
@@ -229,11 +207,9 @@ internal class IntCodeComputerTest {
     val computer = IntCodeComputer(
         listOf(3, 3, 1107, -1, 8, 3, 4, 3, 99),
         initialIo = mapOf("default" to -99)
-    ).init()
+    )
 
-    computer.run()
-
-    assertThat(computer.io().get()).isEqualTo(1)
+    assertThat(computer.run().io().get()).isEqualTo(1)
   }
 
   @Test
@@ -241,11 +217,9 @@ internal class IntCodeComputerTest {
     val computer = IntCodeComputer(
         listOf(3, 3, 1107, -1, 8, 3, 4, 3, 99),
         initialIo = mapOf("default" to 8)
-    ).init()
+    )
 
-    computer.run()
-
-    assertThat(computer.io().get()).isEqualTo(0)
+    assertThat(computer.run().io().get()).isEqualTo(0)
   }
 
   @Test
@@ -253,11 +227,9 @@ internal class IntCodeComputerTest {
     val computer = IntCodeComputer(
         listOf(3, 12, 6, 12, 15, 1, 13, 14, 13, 4, 13, 99, -1, 0, 1, 9),
         initialIo = mapOf("default" to 116)
-    ).init()
+    )
 
-    computer.run()
-
-    assertThat(computer.io().get()).isEqualTo(1)
+    assertThat(computer.run().io().get()).isEqualTo(1)
   }
 
   @Test
@@ -265,11 +237,9 @@ internal class IntCodeComputerTest {
     val computer = IntCodeComputer(
         listOf(3, 12, 6, 12, 15, 1, 13, 14, 13, 4, 13, 99, -1, 0, 1, 9),
         initialIo = mapOf("default" to 0)
-    ).init()
+    )
 
-    computer.run()
-
-    assertThat(computer.io().get()).isEqualTo(0)
+    assertThat(computer.run().io().get()).isEqualTo(0)
   }
 
   @Test
@@ -277,11 +247,9 @@ internal class IntCodeComputerTest {
     val computer = IntCodeComputer(
         listOf(3, 3, 1105, -1, 9, 1101, 0, 0, 12, 4, 12, 99, 1),
         initialIo = mapOf("default" to 116)
-    ).init()
+    )
 
-    computer.run()
-
-    assertThat(computer.io().get()).isEqualTo(1)
+    assertThat(computer.run().io().get()).isEqualTo(1)
   }
 
   @Test
@@ -289,11 +257,9 @@ internal class IntCodeComputerTest {
     val computer = IntCodeComputer(
         listOf(3, 3, 1105, -1, 9, 1101, 0, 0, 12, 4, 12, 99, 1),
         initialIo = mapOf("default" to 0)
-    ).init()
+    )
 
-    computer.run()
-
-    assertThat(computer.io().get()).isEqualTo(0)
+    assertThat(computer.run().io().get()).isEqualTo(0)
   }
 
   @Disabled
@@ -310,8 +276,6 @@ internal class IntCodeComputerTest {
             PresetManualInput(7),
             ConsoleOutput
         )
-    ).init()
-
-    computer.run()
+    ).run()
   }
 }

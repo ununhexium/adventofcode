@@ -47,7 +47,7 @@ internal class D2ATest {
             .split(',')
             .map { it.toInt() },
         12, 2
-    ).run()
+    ).run().program[0]
 
     assertThat(original).isEqualTo(fancy)
   }
@@ -68,7 +68,7 @@ internal class D2ATest {
 
     println(
         nounAndVerb.first {
-          IntCodeComputer(input, it.first, it.second).run() == 19690720
+          IntCodeComputer(input, it.first, it.second).run().program[0] == 19690720
         }
     )
   }

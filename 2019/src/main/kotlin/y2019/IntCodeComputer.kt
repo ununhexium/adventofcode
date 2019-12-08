@@ -97,9 +97,9 @@ class IntCodeComputer(
     return this
   }
 
-  fun run(): Int {
+  fun run(): IntCodeComputer {
     init()
     compute()
-    return internalProgram[0]
+    return this
   }
 }
