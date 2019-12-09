@@ -29,6 +29,12 @@
             <groupId>org.funktionale</groupId>
             <artifactId>funktionale-currying</artifactId>
             <version>1.2</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>kotlin-stdlib</artifactId>
+                    <groupId>org.jetbrains.kotlin</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>

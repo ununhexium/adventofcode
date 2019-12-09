@@ -10,7 +10,7 @@ import y2019.instruction.LessThan
 import y2019.instruction.MulInstruction
 import y2019.instruction.Peek
 import y2019.instruction.Poke
-import y2019.io.DefaultBuffer
+import y2019.io.DefaultBufferFactory
 import y2019.io.DelegatedInputOutput
 import y2019.io.InputOutput
 
@@ -18,19 +18,18 @@ class IntCodeComputer(
     input: List<Int>,
     val noun: Int? = null,
     val verb: Int? = null,
-    val initialIo: Map<String, Int>? = null,
-    val defaultIO: InputOutput = DefaultBuffer
+    val defaultIO: InputOutput = DefaultBufferFactory.create(null)
 ) {
   constructor(
       input: String,
       noun: Int? = null,
       verb: Int? = null,
-      initialIo: Map<String, Int>? = null
+      defaultIO: InputOutput = DefaultBufferFactory.create(null)
   ) : this(
       input.split(',').map { it.toInt() },
       noun,
       verb,
-      initialIo
+      defaultIO
   )
 
   private val internalProgram: MutableList<Int> = input.toMutableList()
@@ -54,21 +53,24 @@ class IntCodeComputer(
             ?: error("No port named $name. Available ports are: ${internalIO.keys}")
       }
 
+  val instructionCache = mutableMapOf<Int, Instruction>()
+
   private fun getInstruction(raw: Int): Instruction {
-    // TODO: cache if perf problems
-    return when (raw % 100) {
-      1 -> AddInstruction(raw)
-      2 -> MulInstruction(raw)
-      3 -> Peek(raw, io())
-      4 -> Poke(raw, io())
-      5 -> JumpIfTrue(raw)
-      6 -> JumpIfFalse(raw)
-      7 -> LessThan(raw)
-      8 -> Equals(raw)
+    return instructionCache.getOrPut(raw) {
+      when (raw % 100) {
+        1 -> AddInstruction(raw)
+        2 -> MulInstruction(raw)
+        3 -> Peek(raw, io())
+        4 -> Poke(raw, io())
+        5 -> JumpIfTrue(raw)
+        6 -> JumpIfFalse(raw)
+        7 -> LessThan(raw)
+        8 -> Equals(raw)
 
-      99 -> Halt()
+        99 -> Halt()
 
-      else -> throw IllegalStateException("No instruction for opcode $raw")
+        else -> throw IllegalStateException("No instruction for opcode $raw")
+      }
     }
   }
 
@@ -88,11 +90,6 @@ class IntCodeComputer(
   fun init(): IntCodeComputer {
     internalProgram[1] = noun ?: internalProgram[1]
     internalProgram[2] = verb ?: internalProgram[2]
-    initialIo?.let {
-      it.entries.forEach { (key, value) ->
-        io(key).set(value)
-      }
-    }
 
     return this
   }

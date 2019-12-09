@@ -1,6 +1,6 @@
 package y2019.io
 
-class PresetManualInput(vararg inputs: Int) : Input {
+class PresetInput(vararg inputs: Int) : Input {
   override val name = "ManualInput"
 
   private val iterator = inputs.iterator()

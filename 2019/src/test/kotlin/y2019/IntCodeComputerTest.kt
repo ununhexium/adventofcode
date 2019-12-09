@@ -5,8 +5,9 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import y2019.io.ConsoleOutput
+import y2019.io.DefaultBufferFactory
 import y2019.io.DelegatedInputOutput
-import y2019.io.PresetManualInput
+import y2019.io.PresetInput
 
 internal class IntCodeComputerTest {
   @Test
@@ -31,9 +32,7 @@ internal class IntCodeComputerTest {
   fun `can use io`() {
     val computer = IntCodeComputer(
         listOf(3, 0, 4, 0, 99),
-        initialIo = mapOf(
-            "default" to 116
-        )
+        defaultIO = DefaultBufferFactory.create(116)
     ).init()
 
     assertThat(computer.io().get()).isEqualTo(116)
@@ -48,7 +47,7 @@ internal class IntCodeComputerTest {
   fun D5A() {
     val computer = IntCodeComputer(
         Resources.getResource("5.input.txt").readText(),
-        initialIo = mapOf("default" to 1)
+        defaultIO = DefaultBufferFactory.create(1)
     )
 
     println(computer.run().program[0])
@@ -58,7 +57,7 @@ internal class IntCodeComputerTest {
   fun D5B() {
     val computer = IntCodeComputer(
         Resources.getResource("5.input.txt").readText(),
-        initialIo = mapOf("default" to 5)
+        defaultIO = DefaultBufferFactory.create(5)
     )
 
     println(computer.run().program[0])
@@ -146,7 +145,7 @@ internal class IntCodeComputerTest {
   fun `input equals 8 - position mode`() {
     val computer = IntCodeComputer(
         listOf(3, 9, 8, 9, 10, 9, 4, 9, 99, -1, 8),
-        initialIo = mapOf("default" to 8)
+        defaultIO = DefaultBufferFactory.create(8)
     )
 
     assertThat(computer.run().io().get()).isEqualTo(1)
@@ -156,7 +155,7 @@ internal class IntCodeComputerTest {
   fun `input not equals 8 - position mode`() {
     val computer = IntCodeComputer(
         listOf(3, 9, 8, 9, 10, 9, 4, 9, 99, -1, 8),
-        initialIo = mapOf("default" to 116)
+        defaultIO = DefaultBufferFactory.create(116)
     )
 
     assertThat(computer.run().io().get()).isEqualTo(0)
@@ -166,7 +165,7 @@ internal class IntCodeComputerTest {
   fun `input less than 8 - position mode`() {
     val computer = IntCodeComputer(
         listOf(3, 9, 7, 9, 10, 9, 4, 9, 99, -1, 8),
-        initialIo = mapOf("default" to -99)
+        defaultIO = DefaultBufferFactory.create(-99)
     )
 
     assertThat(computer.run().io().get()).isEqualTo(1)
@@ -176,7 +175,7 @@ internal class IntCodeComputerTest {
   fun `input not less than 8 - position mode`() {
     val computer = IntCodeComputer(
         listOf(3, 9, 7, 9, 10, 9, 4, 9, 99, -1, 8),
-        initialIo = mapOf("default" to 8)
+        defaultIO = DefaultBufferFactory.create(8)
     )
 
     assertThat(computer.run().io().get()).isEqualTo(0)
@@ -186,7 +185,7 @@ internal class IntCodeComputerTest {
   fun `input equals 8 - immediate mode`() {
     val computer = IntCodeComputer(
         listOf(3, 3, 1108, -1, 8, 3, 4, 3, 99),
-        initialIo = mapOf("default" to 8)
+        defaultIO = DefaultBufferFactory.create(8)
     )
 
     assertThat(computer.run().io().get()).isEqualTo(1)
@@ -196,7 +195,7 @@ internal class IntCodeComputerTest {
   fun `input not equals 8 - immediate mode`() {
     val computer = IntCodeComputer(
         listOf(3, 3, 1108, -1, 8, 3, 4, 3, 99),
-        initialIo = mapOf("default" to 116)
+        defaultIO = DefaultBufferFactory.create(116)
     )
 
     assertThat(computer.run().io().get()).isEqualTo(0)
@@ -206,7 +205,7 @@ internal class IntCodeComputerTest {
   fun `input less than 8 - immediate mode`() {
     val computer = IntCodeComputer(
         listOf(3, 3, 1107, -1, 8, 3, 4, 3, 99),
-        initialIo = mapOf("default" to -99)
+        defaultIO = DefaultBufferFactory.create(-99)
     )
 
     assertThat(computer.run().io().get()).isEqualTo(1)
@@ -216,7 +215,7 @@ internal class IntCodeComputerTest {
   fun `input not less than 8 - immediate mode`() {
     val computer = IntCodeComputer(
         listOf(3, 3, 1107, -1, 8, 3, 4, 3, 99),
-        initialIo = mapOf("default" to 8)
+        defaultIO = DefaultBufferFactory.create(8)
     )
 
     assertThat(computer.run().io().get()).isEqualTo(0)
@@ -226,7 +225,7 @@ internal class IntCodeComputerTest {
   fun `input is non zero - position mode`() {
     val computer = IntCodeComputer(
         listOf(3, 12, 6, 12, 15, 1, 13, 14, 13, 4, 13, 99, -1, 0, 1, 9),
-        initialIo = mapOf("default" to 116)
+        defaultIO = DefaultBufferFactory.create(116)
     )
 
     assertThat(computer.run().io().get()).isEqualTo(1)
@@ -236,7 +235,7 @@ internal class IntCodeComputerTest {
   fun `input is not non zero - position mode`() {
     val computer = IntCodeComputer(
         listOf(3, 12, 6, 12, 15, 1, 13, 14, 13, 4, 13, 99, -1, 0, 1, 9),
-        initialIo = mapOf("default" to 0)
+        defaultIO = DefaultBufferFactory.create(0)
     )
 
     assertThat(computer.run().io().get()).isEqualTo(0)
@@ -246,7 +245,7 @@ internal class IntCodeComputerTest {
   fun `input is non zero - immediate mode`() {
     val computer = IntCodeComputer(
         listOf(3, 3, 1105, -1, 9, 1101, 0, 0, 12, 4, 12, 99, 1),
-        initialIo = mapOf("default" to 116)
+        defaultIO = DefaultBufferFactory.create(116)
     )
 
     assertThat(computer.run().io().get()).isEqualTo(1)
@@ -256,7 +255,7 @@ internal class IntCodeComputerTest {
   fun `input is not non zero - immediate mode`() {
     val computer = IntCodeComputer(
         listOf(3, 3, 1105, -1, 9, 1101, 0, 0, 12, 4, 12, 99, 1),
-        initialIo = mapOf("default" to 0)
+        defaultIO = DefaultBufferFactory.create(0)
     )
 
     assertThat(computer.run().io().get()).isEqualTo(0)
@@ -273,7 +272,7 @@ internal class IntCodeComputerTest {
         ),
         defaultIO = DelegatedInputOutput(
             "default",
-            PresetManualInput(7),
+            PresetInput(7),
             ConsoleOutput
         )
     ).run()
